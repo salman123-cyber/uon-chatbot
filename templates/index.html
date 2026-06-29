@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UON Admissions Support Portal</title>
+    <!-- Tailwind CSS for modern, quick styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for clean icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <!-- Header Navigation Bar -->
+    <nav class="bg-emerald-800 text-white shadow-md px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <i class="fa-solid : fa-university text-2xl text-amber-400"></i>
+            <span class="font-bold text-xl tracking-wide">University of Narowal</span>
+        </div>
+    </nav>
+
+    <!-- Main Content Staging Body -->
+    <main class="max-w-4xl mx-auto my-12 px-4 text-center">
+        <h1 class="text-4xl font-extrabold text-gray-800 mb-4">Admissions Information & AI Support Portal</h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            Welcome to the automated help center. Explore degree pathways, review entry requirements, or chat directly with our AI assistant for instant guidance.
+        </p>
+
+        <!-- Quick Information Grid Panels -->
+
+        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-6 inline-flex items-center space-x-4">
+            <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+            </span>
+            <p class="text-emerald-900 font-medium text-sm">The AI Admissions Assistant is live. Click the bubble in the bottom right corner to start chatting!</p>
+        </div>
+    </main>
+
+    <!-- Floating Chat Toggle Button -->
+    <button id="chat-toggle" class="fixed bottom-6 right-6 bg-emerald-800 text-white rounded-full p-4 shadow-xl hover:bg-emerald-700 transition duration-300 z-50 focus:outline-none flex items-center justify-center w-14 h-14">
+        <i id="toggle-icon" class="fa-solid fa-comments text-xl"></i>
+    </button>
+
+    <!-- Chat Container Window (Hidden by Default) -->
+    <div id="chat-window" class="hidden fixed bottom-24 right-6 w-96 bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col z-50 overflow-hidden max-w-[calc(100vw-2rem)] h-[500px]">
+        <!-- Window Header -->
+        <div class="bg-emerald-800 text-white px-4 py-3 flex justify-between items-center shadow-sm">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-robot text-amber-400"></i>
+                <span class="font-semibold text-sm tracking-wide">UON Admission Bot</span>
+            </div>
+            <button id="close-chat" class="hover:text-amber-300 transition focus:outline-none">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Chat History Window Area -->
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50 text-sm">
+            <div class="bg-white text-gray-800 rounded-2xl rounded-tl-none p-3 shadow-sm border border-gray-100 max-w-[85%]">
+                Hello! Testing UON Admission bot live. Ask away!
+            </div>
+        </div>
+
+        <!-- Input Section Base -->
+        <div class="p-3 bg-white border-t border-gray-100 flex items-center space-x-2">
+            <input id="user-input" type="text" placeholder="Type a message..." class="flex-1 border border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:border-emerald-600 text-sm">
+            <button id="send-btn" class="bg-emerald-800 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl transition text-sm font-medium">
+                Send
+            </button>
+        </div>
+    </div>
+
+    <!-- Toggle & Chat Functionality Logic Script -->
+    <script>
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChat = document.getElementById('close-chat');
+        const toggleIcon = document.getElementById('toggle-icon');
+        
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const chatMessages = document.getElementById('chat-messages');
+
+        // Toggle visibility of the chat box window
+        chatToggle.addEventListener('click', () => {
+            chatWindow.classList.toggle('hidden');
+            if (chatWindow.classList.contains('hidden')) {
+                toggleIcon.className = "fa-solid fa-comments text-xl";
+            } else {
+                toggleIcon.className = "fa-solid fa-chevron-down text-xl";
+                userInput.focus();
+            }
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatWindow.classList.add('hidden');
+            toggleIcon.className = "fa-solid fa-comments text-xl";
+        });
+
+        // Function to append message items dynamically
+        function appendMessage(text, isUser) {
+            const msgDiv = document.createElement('div');
+            if (isUser) {
+                msgDiv.className = "bg-emerald-800 text-white rounded-2xl rounded-tr-none p-3 shadow-sm max-w-[85%] ml-auto text-left";
+            } else {
+                msgDiv.className = "bg-white text-gray-800 rounded-2xl rounded-tl-none p-3 shadow-sm border border-gray-100 max-w-[85%] text-left";
+            }
+            msgDiv.innerText = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Send logic communicating directly with Vercel API
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            appendMessage(message, true);
+            userInput.value = '';
+
+            // Add loading state placeholder
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = "bg-white text-gray-400 rounded-2xl rounded-tl-none p-3 shadow-sm border border-gray-100 max-w-[85%] italic text-left animate-pulse";
+            loadingDiv.innerText = "Typing...";
+            chatMessages.appendChild(loadingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            try {
+                // Pointing directly to your newly deployed Vercel Endpoint
+                const response = await fetch('https://uon-chatbot-mu.vercel.app/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+
+                chatMessages.removeChild(loadingDiv);
+
+                if (!response.ok) throw new Error('Network error');
+                
+                const data = await response.json();
+                appendMessage(data.response || data.message || "No clear response returned.", false);
+            } catch (error) {
+                chatMessages.removeChild(loadingDiv);
+                appendMessage("Backend server connection failed.", false);
+                console.error(error);
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+
+</body>
+</html>
