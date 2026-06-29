@@ -7,6 +7,9 @@ import google.generativeai as genai
 app = Flask(__name__, template_folder='templates')
 CORS(app)
 
+application = app
+
+# Initialize Google AI
 API_KEY = os.environ.get("GCP_API_KEY")
 if API_KEY:
     genai.configure(api_key=API_KEY)
@@ -15,52 +18,56 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 KNOWLEDGE_PATH = os.path.join(BASE_DIR, "uon_knowledge.txt")
 MERITS_PATH = os.path.join(BASE_DIR, "merits_data_normalized.json")
 
-def load_knowledge_base():
+# --- OPTIMIZATION: LOAD DATA INTO MEMORY ONCE ON STARTUP ---
+def pre_load_context():
+    content = ""
     if os.path.exists(KNOWLEDGE_PATH):
         try:
             with open(KNOWLEDGE_PATH, "r", encoding="utf-8") as f:
-                return f.read()
+                content += f"--- UON ADMISSION INFORMATION ---\n{f.read()}\n\n"
         except Exception:
-            return "Error reading text context asset."
-    return "Default Context: University of Narowal Admissions Portal."
-
-def load_merits_data():
+            pass
+            
     if os.path.exists(MERITS_PATH):
         try:
             with open(MERITS_PATH, "r", encoding="utf-8") as f:
-                return json.load(f)
+                json_data = json.load(f)
+                content += f"--- PREVIOUS CLOSING MERITS DATA ---\n{json.dumps(json_data)}"
         except Exception:
-            return {}
-    return {}
+            pass
+            
+    return content if content else "Default UON Admissions Context Data."
+
+# Global context cache
+STATIC_CONTEXT_CACHE = pre_load_context()
+
 
 @app.route('/', methods=['GET'])
 def home():
     try:
-        # Fallback debug directly on screen if templates get lost in Vercel cache
-        template_file = os.path.join(BASE_DIR, 'templates', 'index.html')
-        if not os.path.exists(template_file):
-            return f"System Path Error: index.html not found at {template_file}. Current root contents: {os.listdir(BASE_DIR)}"
         return render_template('index.html')
     except Exception as e:
-        return f"Unexpected Engine Error: {str(e)}"
+        return f"Template Configuration Mismatch: {str(e)}"
+
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
     if not API_KEY:
-        return jsonify({"response": "GCP_API_KEY is missing from Vercel configuration variables."}), 500
+        return jsonify({"response": "Backend Missing Variable: GCP_API_KEY is not configured on Vercel Dashboard."}), 500
 
     try:
         data = request.get_json()
         if not data or 'message' not in data:
-            return jsonify({"response": "Invalid prompt structure."}), 400
+            return jsonify({"response": "Invalid request message payload."}), 400
         
         user_message = data['message']
-        knowledge_context = load_knowledge_base()
-        merits_context = load_merits_data()
 
+        # Use the ultra-fast global memory string instead of reading disk files over and over
         system_instruction = (
-            "You are the official University of Narowal Admissions AI assistant. "
-            f"Context:\n{knowledge_context}\n\nMerits:\n{json.dumps(merits_context)}"
+            "You are the official University of Narowal (UON) Admissions AI Assistant. "
+            "Help students with accurate info about criteria, merits, programs, and fees using this context:\n\n"
+            f"{STATIC_CONTEXT_CACHE}\n\n"
+            "Keep answers concise, direct, and professional. If unknown, point to the registrar window."
         )
 
         model = genai.GenerativeModel(
@@ -68,11 +75,20 @@ def chat():
             system_instruction=system_instruction
         )
 
+        # Generate response from Gemini
         response = model.generate_content(user_message)
-        return jsonify({"response": response.text, "status": "success"})
+        
+        # Check if response came back empty
+        reply_text = response.text if response.text else "I am processing your query, please try rephrasing."
+
+        return jsonify({
+            "response": reply_text,
+            "status": "success"
+        })
 
     except Exception as e:
-        return jsonify({"response": f"Runtime exception occurred: {str(e)}"}), 500
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+        # Fallback messaging so the frontend widget doesn't stay blank on a crash
+        return jsonify({
+            "response": f"The AI engine took too long or encountered an error: {str(e)}",
+            "status": "error"
+        }), 200  # Return 200 so the frontend catch block doesn't hide the error message
