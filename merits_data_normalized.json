@@ -1,0 +1,275 @@
+[
+  {
+    "canonical_name": "Computer Science",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 47.23,
+    "original_name": "Computer Science 1St Merit List Admission Spring 2026"
+  },
+  {
+    "canonical_name": "Computer Science",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 83.81,
+    "original_name": "Cs"
+  },
+  {
+    "canonical_name": "Computer Science",
+    "shift": "Evening",
+    "merit_list": "1st",
+    "closing": 82.57,
+    "original_name": "Cs Ssp"
+  },
+  {
+    "canonical_name": "Computer Science",
+    "shift": "Evening",
+    "merit_list": "2nd",
+    "closing": 70.13,
+    "original_name": "Cs Ssp 2Nd Merit List"
+  },
+  {
+    "canonical_name": "Business Administration (BBA)",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 46.37,
+    "original_name": "Bba 1St Merit List Admission Spring 2026"
+  },
+  {
+    "canonical_name": "Business Administration (BBA)",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 67.69,
+    "original_name": "Bba"
+  },
+  {
+    "canonical_name": "Business Administration (BBA)",
+    "shift": "Evening",
+    "merit_list": "1st",
+    "closing": 73.48,
+    "original_name": "Bba Ssp"
+  },
+  {
+    "canonical_name": "Business Administration (BBA)",
+    "shift": "Evening",
+    "merit_list": "2nd",
+    "closing": 48.53,
+    "original_name": "Bba Ssp 2Nd Merit List"
+  },
+  {
+    "canonical_name": "Accounting & Finance",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 66.31,
+    "original_name": "Accounting Finance"
+  },
+  {
+    "canonical_name": "Chemistry",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 59.44,
+    "original_name": "Chemistry"
+  },
+  {
+    "canonical_name": "Biochemistry",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 60.08,
+    "original_name": "Bio Chemistry"
+  },
+  {
+    "canonical_name": "Biotechnology",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 65.93,
+    "original_name": "Bio Technology"
+  },
+  {
+    "canonical_name": "Biotechnology",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 65.01,
+    "original_name": "Biotech"
+  },
+  {
+    "canonical_name": "Botany",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 56.23,
+    "original_name": "Botany"
+  },
+  {
+    "canonical_name": "Pharmacy (Pharm-D)",
+    "shift": "Morning",
+    "merit_list": "3rd",
+    "closing": 81.39,
+    "original_name": "3Rd Merit List D Pharmacy Admission Spring 2026"
+  },
+  {
+    "canonical_name": "Pharmacy (Pharm-D)",
+    "shift": "Morning",
+    "merit_list": "2nd",
+    "closing": 82.51,
+    "original_name": "2Nd List D Pharmacy"
+  },
+  {
+    "canonical_name": "Pharmacy (Pharm-D)",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 84.74,
+    "original_name": "Pharm D 1St Merit List Admission Spring 2026 1"
+  },
+  {
+    "canonical_name": "Economics",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 47.44,
+    "original_name": "Economics"
+  },
+  {
+    "canonical_name": "Education",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 47.44,
+    "original_name": "Educaton"
+  },
+  {
+    "canonical_name": "Education",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 60.19,
+    "original_name": "Education"
+  },
+  {
+    "canonical_name": "English Literature",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 57.86,
+    "original_name": "English Literature"
+  },
+  {
+    "canonical_name": "English Literature",
+    "shift": "Evening",
+    "merit_list": "1st",
+    "closing": 69.28,
+    "original_name": "English Literature Ssp"
+  },
+  {
+    "canonical_name": "English Literature",
+    "shift": "Evening",
+    "merit_list": "2nd",
+    "closing": 47.87,
+    "original_name": "English Literature Ssp 2Nd Merit List"
+  },
+  {
+    "canonical_name": "English Linguistics",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 53.65,
+    "original_name": "English Linguistics"
+  },
+  {
+    "canonical_name": "English Linguistics",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 50.21,
+    "original_name": "Linguistics"
+  },
+  {
+    "canonical_name": "Environmental Sciences",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 54.86,
+    "original_name": "Env Science"
+  },
+  {
+    "canonical_name": "Environmental Sciences",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 68.87,
+    "original_name": "Environmental Sciences"
+  },
+  {
+    "canonical_name": "Fine Arts",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 47.44,
+    "original_name": "Fine Arts"
+  },
+  {
+    "canonical_name": "Food Science & Technology",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 66.64,
+    "original_name": "Fst"
+  },
+  {
+    "canonical_name": "Food Science & Technology",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 67.69,
+    "original_name": "Food Science"
+  },
+  {
+    "canonical_name": "Mass Communication (MCM)",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 58.88,
+    "original_name": "Mcm"
+  },
+  {
+    "canonical_name": "Mass Communication (MCM)",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 51.93,
+    "original_name": "Mcm 2"
+  },
+  {
+    "canonical_name": "Mathematics",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 55.03,
+    "original_name": "Math"
+  },
+  {
+    "canonical_name": "Mathematics",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 73.56,
+    "original_name": "Mathematics"
+  },
+  {
+    "canonical_name": "Education",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 49.24,
+    "original_name": "Physical Education"
+  },
+  {
+    "canonical_name": "Physics",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 51.36,
+    "original_name": "Physics"
+  },
+  {
+    "canonical_name": "Psychology",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 58.38,
+    "original_name": "Psychology"
+  },
+  {
+    "canonical_name": "Urdu",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 47.44,
+    "original_name": "Urdu"
+  },
+  {
+    "canonical_name": "Zoology",
+    "shift": "Morning",
+    "merit_list": "1st",
+    "closing": 56.38,
+    "original_name": "Zoology"
+  }
+]
