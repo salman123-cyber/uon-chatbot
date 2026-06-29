@@ -5,7 +5,7 @@ import requests
 import json
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 CORS(app)  # Allows your frontend widget to talk to the backend without CORS blocks
 
 # 1. API Configuration Parameters
@@ -88,11 +88,12 @@ def chat():
 
 @app.route('/')
 def home():
-    try:
-        with open('index.html', 'r', encoding='utf-8') as file:
-            return file.read()
-    except FileNotFoundError:
-        return "Backend active, but index.html file not found in current folder context."
+    # Verify the template exists before trying to render it
+    template_path = os.path.join(app.template_folder, 'index.html')
+    if not os.path.exists(template_path):
+        return f"Debug Info: Looking for template at {template_path}. Folder items: {os.listdir(app.template_folder) if os.path.exists(app.template_folder) else 'Folder not found'}"
+    
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
